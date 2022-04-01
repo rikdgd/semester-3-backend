@@ -3,14 +3,11 @@ package com.pokemoncardmarkt.pokemoncardmarkt_backend.controller;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.PokemonCard;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.PokemonCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/")
 public class CardController {
@@ -21,5 +18,10 @@ public class CardController {
     @GetMapping("/allCards")
     public List<PokemonCard> GetAllCards(){
         return pokemonCardRepository.findAll();
+    }
+
+    @GetMapping("/card/{id}")
+    public PokemonCard GetCardById(@PathVariable long id) {
+        return pokemonCardRepository.findById(id).orElseThrow();
     }
 }
