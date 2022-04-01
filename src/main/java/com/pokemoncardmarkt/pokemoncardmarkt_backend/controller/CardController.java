@@ -24,4 +24,6 @@ public class CardController {
     public PokemonCard GetCardById(@PathVariable long id) {
         return pokemonCardRepository.findById(id).orElseThrow();
     }
+
+
 }

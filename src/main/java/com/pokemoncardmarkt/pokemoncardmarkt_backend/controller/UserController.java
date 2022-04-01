@@ -24,4 +24,9 @@ public class UserController {
     public User GetUserById(@PathVariable long id){
         return userRepository.findById(id).orElseThrow();
     }
+
+    @PostMapping("/create_account")
+    public User CreateUser(@RequestBody User user){
+        return userRepository.save(user);
+    }
 }

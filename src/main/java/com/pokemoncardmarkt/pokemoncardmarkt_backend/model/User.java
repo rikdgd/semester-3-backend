@@ -11,15 +11,17 @@ public class User {
 
     private String Name;
     private String Email;
+    private String Password;
 
     public User(){
 
     }
 
-    public User(long id, String name, String email) {
+    public User(long id, String name, String email, String password) {
         Id = id;
         Name = name;
         Email = email;
+        Password = password;
     }
 
     public long getId() {
@@ -40,5 +42,13 @@ public class User {
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 }
