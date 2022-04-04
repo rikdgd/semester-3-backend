@@ -9,8 +9,8 @@ cache:
     - target
 
 stages:
-  -build
-  -test
+  - build
+  - test
   # -package
   # -deploy
 
