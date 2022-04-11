@@ -23,14 +23,14 @@ build_job:
     - echo "starting build"
     - "mvn compile"
 
-test_job:
-  stage: test
-  tags:
-    - maven
+# test_job:
+#   stage: test
+#   tags:
+#     - maven
 
-  script:
-    - echo "started testing"
-    - "mvn test"
+#   script:
+#     - echo "started testing"
+#     - "mvn test"
 
 # package_job:
 #   stage: package
