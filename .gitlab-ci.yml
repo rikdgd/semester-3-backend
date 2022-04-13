@@ -1,5 +1,7 @@
-# variables:
+variables:
 #   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+  DOCKER_USERNAME: rikdegoede
+  DOCKER_PASSWORD: lXn6Ek0dPYnCEaRe1J6O
 
 image: maven:latest
 
@@ -33,7 +35,7 @@ dockerize_job:
     - echo "start building container..."
     # - "docker info"
     - "docker build -t rikdegoede/pokemon-card-markt ."
-    - "docker login" 
+    - "docker login"  
     - "docker push rikdegoede/pokemon-card-markt"
 
 # test_job:
