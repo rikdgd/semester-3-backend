@@ -10,18 +10,9 @@ cache:
 
 stages:
   - build
-  - docker
   # - test
   # -package
   # -deploy
-
-docker_job:
-  stage: docker
-  tags:
-    - maven
-
-  script:
-    - docker info
 
 build_job:
   stage: build
@@ -31,6 +22,17 @@ build_job:
   script:
     - echo "starting build"
     - "mvn compile"
+
+dockerize_job:
+  stage: dockerize_job
+  tags:
+    - docker
+  
+  script:
+    - echo "start building container..."
+    - "docker info"
+    # - "docker build -t rikdegoede/pokemonCardMarkt ."
+    # - "docker push rikdegoede/pokemonCardMarkt"
 
 # test_job:
 #   stage: test
