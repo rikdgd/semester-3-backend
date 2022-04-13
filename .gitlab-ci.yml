@@ -14,6 +14,14 @@ stages:
   # -package
   # -deploy
 
+docker_job:
+  stage: docker
+  tags:
+    - docker
+
+  script:
+    - docker info
+
 build_job:
   stage: build
   tags:
@@ -41,11 +49,3 @@ build_job:
   #   - echo "packaging stage started"
   #   - "mvn package"
 
-# deploy_job:
-#   stage: deploy
-
-  # tags:
-  #   - docker
-
-  # script:
-  #   - echo "started deploying"
