@@ -33,7 +33,7 @@ dockerize_job:
     - echo "start building container..."
     # - "docker info"
     - "docker build -t rikdegoede/pokemon-card-markt ."
-    # - "docker push rikdegoede/pokemonCardMarkt"
+    - "docker push rikdegoede/pokemon-card-markt"
 
 # test_job:
 #   stage: test
