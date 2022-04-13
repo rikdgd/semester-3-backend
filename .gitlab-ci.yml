@@ -32,7 +32,7 @@ dockerize_job:
   script:
     - echo "start building container..."
     # - "docker info"
-    - "docker build -t rikdegoede/pokemonCardMarkt ."
+    - "docker build -t rikdegoede/pokemon-card-markt ."
     # - "docker push rikdegoede/pokemonCardMarkt"
 
 # test_job:
