@@ -31,8 +31,8 @@ dockerize_job:
   
   script:
     - echo "start building container..."
-    - "docker info"
-    # - "docker build -t rikdegoede/pokemonCardMarkt ."
+    # - "docker info"
+    - "docker build -t rikdegoede/pokemonCardMarkt ."
     # - "docker push rikdegoede/pokemonCardMarkt"
 
 # test_job:
