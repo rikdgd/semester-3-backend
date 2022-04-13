@@ -35,7 +35,7 @@ dockerize_job:
     - echo "start building container..."
     # - "docker info"
     - "docker build -t rikdegoede/pokemon-card-markt ."
-    - "docker login $DOCKER_USERNAME $DOCKER_PASSWORD"
+    - "docker login $DOCKER_USERNAME"  #$DOCKER_PASSWORD
     - "docker push rikdegoede/pokemon-card-markt"
 
 # test_job:
