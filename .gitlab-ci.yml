@@ -28,7 +28,7 @@ dockerize_job:
     - docker:dind
   
   before_script:
-     - docker login -u "$DOCKER_USERNAME" -p "DOCKER_PASSWORD" 
+     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" 
   
   # should be cmd, not script
   script:
