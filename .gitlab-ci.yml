@@ -1,9 +1,4 @@
-variables:
-#   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
-  DOCKER_USERNAME: rikdegoede
-  DOCKER_PASSWORD: lXn6Ek0dPYnCEaRe1J6O
-
-image: maven:latest
+image: maven:latest 
 
 cache:
   paths:
@@ -13,9 +8,6 @@ cache:
 stages:
   - build
   - dockerize
-  # - test
-  # -package
-  # -deploy
 
 build_job:
   stage: build
@@ -27,9 +19,16 @@ build_job:
     - "mvn compile"
 
 dockerize_job:
+  image: docker:latest
   stage: dockerize
   tags:
     - docker
+  
+  services:
+    - docker:dind
+  
+  before_script:
+     - docker login -u "$DOCKER_USERNAME" -p "DOCKER_PASSWORD" 
   
   # should be cmd, not script
   script:
@@ -38,22 +37,3 @@ dockerize_job:
     - "docker build -t rikdegoede/pokemon-card-markt ."
     # - "docker login $DOCKER_USERNAME"  #$DOCKER_PASSWORD
     - "docker push rikdegoede/pokemon-card-markt"
-
-# test_job:
-#   stage: test
-#   tags:
-#     - maven
-
-#   script:
-#     - echo "started testing"
-#     - "mvn test"
-
-# package_job:
-#   stage: package
-#   tags:
-#     - docker
-
-  # script:
-  #   - echo "packaging stage started"
-  #   - "mvn package"
-
