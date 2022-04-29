@@ -1,8 +1,7 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.controller;
 
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.PokemonCard;
-import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.PokemonCardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.services.CardService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,18 +11,15 @@ import java.util.List;
 @RequestMapping("/api/v1/")
 public class CardController {
 
-    @Autowired
-    private PokemonCardRepository pokemonCardRepository;
+    private CardService cardService;
 
     @GetMapping("/allCards")
     public List<PokemonCard> GetAllCards(){
-        return pokemonCardRepository.findAll();
+        return cardService.GetAllCards();
     }
 
     @GetMapping("/card/{id}")
     public PokemonCard GetCardById(@PathVariable long id) {
-        return pokemonCardRepository.findById(id).orElseThrow();
+        return cardService.GetCardById(id);
     }
-
-
 }
