@@ -1,6 +1,13 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
+import lombok.*;
+
 import javax.persistence.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 
 @Entity
 @Table(name = "users")
@@ -9,36 +16,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
+    @Column(name = "name", nullable = false)
     private String Name;
+
+    @Column(name = "email", nullable = false)
     private String Email;
 
-    public User(){
-
-    }
-
-    public User(long id, String name, String email) {
-        Id = id;
-        Name = name;
-        Email = email;
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
+    @Column(name = "password", nullable = false)
+    private String Password;
 }

@@ -1,8 +1,7 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.controller;
 
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.User;
-import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,16 +11,22 @@ import java.util.List;
 @RequestMapping("/api/v1/")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping("/users")
     public List<User> GetAllUsers(){
-        return userRepository.findAll();
+        return userService.GetAllUsers();
     }
 
     @GetMapping("/users/{id}")
     public User GetUserById(@PathVariable long id){
-        return userRepository.findById(id).orElseThrow();
+        return userService.GetUserById(id);
     }
+
+    @PostMapping("/create_account")
+    public User CreateUser(@RequestBody User user){
+        return userService.CreateUser(user);
+    }
+
+
 }
