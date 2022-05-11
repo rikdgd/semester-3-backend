@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class CardService {
 
-    @Autowired
     private PokemonCardRepository pokemonCardRepository;
 
     public List<PokemonCard> GetAllCards(){
@@ -20,5 +19,14 @@ public class CardService {
 
     public PokemonCard GetCardById(long id){
         return pokemonCardRepository.findById(id).orElseThrow();
+    }
+
+    public PokemonCard CreateCard(PokemonCard card){
+        return pokemonCardRepository.save(card);
+    }
+
+    @Autowired
+    public CardService(PokemonCardRepository pokemonCardRepository) {
+        this.pokemonCardRepository = pokemonCardRepository;
     }
 }

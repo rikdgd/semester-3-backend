@@ -1,5 +1,6 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,13 +19,17 @@ public class Expansion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "Name")
     private String Name;
 
-    @OneToMany
-    @Column(name = "Cards", nullable = false)
+    @OneToMany(mappedBy = "expansion")
+    @Column(name = "Cards")
     private List<PokemonCard> Cards;
 
-    @Column(name = "ReleaseDate", nullable = false)
+    @Column(name = "ReleaseDate")
     private String ReleaseDate;
+
+    public Expansion(long id) {
+        Id = id;
+    }
 }

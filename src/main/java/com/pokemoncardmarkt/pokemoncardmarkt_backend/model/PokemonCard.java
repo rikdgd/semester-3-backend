@@ -1,5 +1,7 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.PokemonTypes;
 import lombok.*;
 
@@ -10,6 +12,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 
+@JsonIgnoreProperties(value = "expansion")
+
 @Entity
 @Table(name = "pokemon_cards")
 public class PokemonCard {
@@ -18,15 +22,25 @@ public class PokemonCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String Name;
 
-    @Column(name = "health_points", nullable = false)
+    @Column(name = "health_points")
     private int HealthPoints;
 
     @Column(name = "type")
     private PokemonTypes Type;
 
-    @Column(name = "expansion")
-    private String Expansion;
+    @ManyToOne
+    @JoinColumn(name = "expansion_id", referencedColumnName = "Id")
+    private Expansion expansion;
+
+    public PokemonCard(long id) {
+        Id = id;
+    }
+
+    public PokemonCard(long id, Expansion expansion) {
+        Id = id;
+        this.expansion = expansion;
+    }
 }

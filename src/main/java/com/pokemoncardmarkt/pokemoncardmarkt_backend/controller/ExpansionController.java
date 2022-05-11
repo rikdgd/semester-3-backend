@@ -13,11 +13,30 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class ExpansionController {
 
-    @Autowired
     private ExpansionService expansionService;
+
+    @Autowired
+    public ExpansionController(ExpansionService expansionService) {
+        this.expansionService = expansionService;
+    }
 
     @GetMapping("/allExpansions")
     public List<Expansion> GetAllExpansions(){
         return expansionService.GetAllExpansions();
     }
+
+    @GetMapping("/Expansion/{id}")
+    public Expansion GetExpansionById(@PathVariable long id){
+        return expansionService.GetExpansionById(id);
+    }
+
+    @PostMapping("/create_expansion")
+    public Expansion CreateExpansion(@RequestBody Expansion expansion){
+        return expansionService.CreateExpansion(expansion);
+    }
+
+//    @PostMapping("/AddCard")
+//    public Expansion AddCard(@RequestBody long expansionId, @RequestBody long cardId){
+//        return expansionService.AddCard(expansionId, cardId);
+//    }
 }
