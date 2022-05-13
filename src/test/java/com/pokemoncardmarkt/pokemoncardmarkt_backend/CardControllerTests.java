@@ -5,6 +5,7 @@ import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.Expansion;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.PokemonCard;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.PokemonCardRepository;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.services.CardService;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -30,9 +31,10 @@ class PokemonCardMarktBackEndApplicationTests {
 
         // act
         when(cardRepo.findById(1L)).thenReturn(Optional.of(definedCard));
+        foundCard = controller.GetCardById(1L);
 
         // assert
-
+        Assert.assertEquals(definedCard, foundCard);
     }
 
 }
