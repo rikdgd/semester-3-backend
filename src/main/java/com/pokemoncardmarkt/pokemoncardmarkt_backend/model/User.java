@@ -18,11 +18,11 @@ public class User {
 
     @Column(name = "name", nullable = false)
     // todo: refactor to lower case for jpa
-    private String Name;
+    private String name;
 
     @Column(name = "email", nullable = false)
-    private String Email;
+    private String email;
 
     @Column(name = "password", nullable = false)
-    private String Password;
+    private String password;
 }
