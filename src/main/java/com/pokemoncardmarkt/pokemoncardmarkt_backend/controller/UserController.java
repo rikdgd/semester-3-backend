@@ -34,5 +34,8 @@ public class UserController {
         return userService.CreateUser(user);
     }
 
-
+    @GetMapping("login/{username}/{password}")
+    public boolean login(@PathVariable String username, @PathVariable String password){
+        return userService.Login(username, password);
+    }
 }

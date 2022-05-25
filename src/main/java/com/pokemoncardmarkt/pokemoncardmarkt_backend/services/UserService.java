@@ -28,4 +28,8 @@ public class UserService {
     public User CreateUser(User user){
         return userRepository.save(user);
     }
+
+    public boolean Login(String username, String password){
+        return userRepository.existsByNameAndPassword(username, password);
+    }
 }
