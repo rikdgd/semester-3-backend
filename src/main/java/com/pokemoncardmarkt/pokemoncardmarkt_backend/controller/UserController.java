@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("login/{username}/{password}")
-    public boolean login(@PathVariable String username, @PathVariable String password){
+    public long login(@PathVariable String username, @PathVariable String password){
         return userService.Login(username, password);
     }
 }

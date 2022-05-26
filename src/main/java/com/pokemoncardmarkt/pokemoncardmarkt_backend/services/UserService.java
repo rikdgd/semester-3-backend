@@ -29,7 +29,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean Login(String username, String password){
-        return userRepository.existsByNameAndPassword(username, password);
+    public long Login(String username, String password){
+        try{
+            User loginUser = userRepository.getUserByNameAndPassword(username, password);
+            return loginUser.getId();
+        }
+        // If login failed, return impossible id to communicate failure.
+        catch(Exception ex){
+            return -1;
+        }
     }
 }

@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
-    // todo: should not return boolean, but long with userid
     boolean existsByNameAndPassword(String name, String password);
+    User getUserByNameAndPassword(String name, String password);
 
 }
