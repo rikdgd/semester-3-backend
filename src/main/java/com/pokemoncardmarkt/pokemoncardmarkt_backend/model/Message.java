@@ -1,5 +1,6 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.Status;
 import lombok.*;
 
 @NoArgsConstructor
