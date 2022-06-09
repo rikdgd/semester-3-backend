@@ -17,7 +17,6 @@ public class User {
     private long Id;
 
     @Column(name = "name", nullable = false)
-    // todo: refactor to lower case for jpa
     private String name;
 
     @Column(name = "email", nullable = false)
