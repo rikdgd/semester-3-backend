@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/")
 public class CollectionController {
 
-    private CollectionService collectionService;
+    private final CollectionService collectionService;
 
     @Autowired
     public CollectionController(CollectionService collectionService) {
@@ -27,9 +27,11 @@ public class CollectionController {
         return collectionService.GetByUserId(userId);
     }
 
-    @PostMapping("/collection/{collId}/add_card/{cardId}")
-    public Collection AddCardById(@PathVariable long collId, @PathVariable long cardId){
-        return collectionService.AddCardById(collId, cardId);
+
+    @PostMapping("/collection/{userId}/add_card/{cardId}")
+    public Collection AddCardById(@PathVariable long userId, @PathVariable long cardId){
+        Collection createdCollection = collectionService.CreateCollection(userId);
+        return collectionService.AddCardById(createdCollection.getId(), cardId);
     }
 
     @PostMapping("collection/{collId}/remove_card/{cardId}")
