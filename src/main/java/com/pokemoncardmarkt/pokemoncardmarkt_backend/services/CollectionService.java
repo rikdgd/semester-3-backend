@@ -31,7 +31,7 @@ public class CollectionService {
     public Collection CreateCollection(long userId){
         User requestedUser = userService.GetUserById(userId);
         Collection newCollection = new Collection(requestedUser);
-        collectionRepository.save(newCollection);
+        return collectionRepository.save(newCollection);
     }
 
     public Collection AddCardById(long collectionId, long cardId){

@@ -6,6 +6,7 @@ import com.pokemoncardmarkt.pokemoncardmarkt_backend.PokemonTypes;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +35,9 @@ public class PokemonCard {
     @ManyToOne
     @JoinColumn(name = "expansion_id", referencedColumnName = "Id")
     private Expansion expansion;
+
+    @ManyToMany
+    private List<Collection> collections;
 
     public PokemonCard(long id) {
         Id = id;

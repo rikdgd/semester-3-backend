@@ -21,7 +21,7 @@ public class Collection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne(optional = true)
     private User user;
 
     @ManyToMany
