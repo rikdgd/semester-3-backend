@@ -15,7 +15,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = "expansion")
 
 @Entity
-@Table(name = "pokemon_cards")
+@Table(name = "pokemonCards")
 public class PokemonCard {
 
     @Id

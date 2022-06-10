@@ -28,4 +28,7 @@ public class Collection {
     @Column(name = "cards")
     private List<PokemonCard> cards;
 
+    public Collection(User user){
+        this.user = user;
+    }
 }

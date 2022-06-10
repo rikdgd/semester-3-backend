@@ -28,6 +28,11 @@ public class CollectionService {
         return collectionRepository.findCollectionByUser(foundUser);
     }
 
+    public Collection CreateCollection(long userId){
+        User requestedUser = userService.GetUserById(userId);
+        Collection newCollection = new Collection(requestedUser);
+        collectionRepository.save(newCollection);
+    }
 
     public Collection AddCardById(long collectionId, long cardId){
         PokemonCard foundCard = cardService.GetCardById(cardId);
