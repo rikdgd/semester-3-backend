@@ -11,7 +11,7 @@ stages:
   - dockerize
 
 build_job:
-  image: maven:latest
+  image: docker:latest
   stage: build
   tags:
     # - mavenshell
