@@ -17,7 +17,7 @@ build_job:
 
   script:
     - echo "starting build"
-    - "mvn compile"
+    # - "mvn compile"
 
 test_job:
   stage: test
