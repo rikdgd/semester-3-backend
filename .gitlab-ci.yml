@@ -11,13 +11,15 @@ stages:
   - dockerize
 
 build_job:
+  image: maven:latest
   stage: build
   tags:
-    - maven
+    - mavenshell
+    # - maven
 
   script:
     - echo "starting build"
-    # - "mvn compile"
+    - "mvn compile"
 
 test_job:
   stage: test
