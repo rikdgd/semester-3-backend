@@ -14,12 +14,12 @@ build_job:
   image: maven:latest
   stage: build
   tags:
-    - mavenshell
-    # - maven
+    # - mavenshell
+    - maven
 
   script:
     - echo "starting build"
-    - "maven compile"
+    - "mvn compile"
 
 test_job:
   stage: test
