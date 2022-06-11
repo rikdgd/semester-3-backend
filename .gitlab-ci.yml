@@ -7,6 +7,7 @@ cache:
 
 stages:
   - build
+  - test
   - dockerize
 
 build_job:
@@ -17,6 +18,15 @@ build_job:
   script:
     - echo "starting build"
     - "mvn compile"
+
+test_job:
+  stage: test
+  tags:
+    - maven
+  
+  script:
+    - echo "start testing"
+    - "mvn test"
 
 dockerize_job:
   image: docker:latest
