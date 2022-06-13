@@ -1,6 +1,5 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.PokemonTypes;
 import lombok.*;
@@ -37,7 +36,7 @@ public class PokemonCard {
     private Expansion expansion;
 
     @ManyToMany
-    private List<Collection> collections;
+    private List<CardCollection> cardCollections;
 
     public PokemonCard(long id) {
         Id = id;

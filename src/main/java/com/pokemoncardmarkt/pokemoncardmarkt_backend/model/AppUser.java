@@ -3,6 +3,9 @@ package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,7 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
@@ -26,5 +29,8 @@ public class User {
     private String password;
 
     @OneToOne(optional = true)
-    private Collection collection;
+    private CardCollection cardCollection;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 }
