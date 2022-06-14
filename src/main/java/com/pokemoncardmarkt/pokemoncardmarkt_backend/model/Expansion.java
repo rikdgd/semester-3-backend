@@ -16,7 +16,7 @@ public class Expansion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long Id;
 
     @Column(name = "Name")
     private String Name;

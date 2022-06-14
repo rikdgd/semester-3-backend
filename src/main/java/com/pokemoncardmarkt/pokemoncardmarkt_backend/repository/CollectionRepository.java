@@ -5,5 +5,5 @@ import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CollectionRepository extends JpaRepository<CardCollection, Long> {
-    CardCollection findCollectionByUser(AppUser appUser);
+    CardCollection findCardCollectionByAppUser(AppUser appUser);
 }

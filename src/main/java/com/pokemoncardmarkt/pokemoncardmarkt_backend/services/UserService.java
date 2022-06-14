@@ -6,16 +6,29 @@ import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.RoleRepository;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserService implements IAppUserService{
+public class UserService implements IAppUserService, UserDetailsService {
+
+    @Autowired
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+    }
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -67,5 +80,24 @@ public class UserService implements IAppUserService{
         catch(Exception ex){
             return -1;
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AppUser user =  userRepository.findAppUserByName(username);
+
+        if (user == null){
+            log.error("user not found...");
+            throw new UsernameNotFoundException("user not found");
+        }
+        else {
+            log.info("user {} found", username);
+        }
+
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+        return new User(user.getName(), user.getPassword(), authorities);
     }
 }

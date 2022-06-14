@@ -26,7 +26,7 @@ class PokemonCardMarktBackEndApplicationTests {
         PokemonCard foundCard;
 
         Expansion expansion = new Expansion();
-        PokemonCard definedCard = new PokemonCard(1, "Pikachu", 20, PokemonTypes.electric, expansion);
+        PokemonCard definedCard = new PokemonCard(null, "Pikachu", 20, PokemonTypes.electric, expansion, null);
 
 
         // act

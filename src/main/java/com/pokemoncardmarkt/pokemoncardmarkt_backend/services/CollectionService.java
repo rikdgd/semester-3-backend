@@ -25,7 +25,7 @@ public class CollectionService {
 
     public CardCollection GetByUserId(long userId){
         AppUser foundAppUser = userService.GetUserById(userId);
-        return collectionRepository.findCollectionByUser(foundAppUser);
+        return collectionRepository.findCardCollectionByAppUser(foundAppUser);
     }
 
     public CardCollection CreateCollection(long userId){
