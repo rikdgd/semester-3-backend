@@ -35,17 +35,20 @@ public class UserService implements IAppUserService{
 
     @Override
     public AppUser SaveUser(AppUser appUser){
+        log.info("saving user {}", appUser.getName());
         return userRepository.save(appUser);
     }
 
     @Override
     public Role SaveRole(Role role) {
+        log.info("saving role {}", role.getName());
         return roleRepository.save(role);
     }
 
     @Override
-    public void AddRoleToUser(String name, String roleName) {
-        AppUser user = userRepository.findAppUserByName(name);
+    public void AddRoleToUser(String username, String roleName) {
+        log.info("adding role: {} to user: {}", roleName, username);
+        AppUser user = userRepository.findAppUserByName(username);
         Role role = roleRepository.findRoleByName(roleName);
         user.getRoles().add(role);
     }
