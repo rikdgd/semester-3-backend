@@ -29,6 +29,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void DeleteUserById(long id) {
+        userRepository.deleteUserById(id);
+    }
+
     public long Login(String username, String password){
         try{
             User loginUser = userRepository.getUserByNameAndPassword(username, password);

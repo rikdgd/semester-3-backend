@@ -38,4 +38,9 @@ public class UserController {
     public long login(@PathVariable String username, @PathVariable String password){
         return userService.Login(username, password);
     }
+
+    @DeleteMapping("users/delete/{id}")
+    public void DeleteUserById(@PathVariable long id) {
+        userService.DeleteUserById(id);
+    }
 }
