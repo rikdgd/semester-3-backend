@@ -6,12 +6,12 @@ import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.RoleRepository;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,21 +21,13 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 @Slf4j
 public class UserService implements IAppUserService, UserDetailsService {
 
-    @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
-
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<AppUser> GetAllUsers(){
@@ -49,6 +41,7 @@ public class UserService implements IAppUserService, UserDetailsService {
     @Override
     public AppUser SaveUser(AppUser appUser){
         log.info("saving user {}", appUser.getName());
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         return userRepository.save(appUser);
     }
 
