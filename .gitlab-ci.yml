@@ -28,7 +28,7 @@ test_job:
   script:
     - echo "start testing"
     # - "mvn clean verify"
-    - "mvn clean verify"
+    - "mvn verify"
 
 dockerize_job:
   image: docker:latest
