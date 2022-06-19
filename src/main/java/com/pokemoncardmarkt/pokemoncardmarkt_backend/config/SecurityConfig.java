@@ -54,14 +54,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(GET, "/api/v1/Expansion/**").permitAll();
 
 
-        http.authorizeRequests().antMatchers(GET, "/api/v1/users/**").hasAnyAuthority(authUser, authAdmin);
-        http.authorizeRequests().antMatchers(POST, "/api/v1/role/**").hasAnyAuthority(authAdmin);
-        http.authorizeRequests().antMatchers(POST, "/api/v1/create_card/").hasAnyAuthority(authAdmin);
-        http.authorizeRequests().antMatchers(POST, "/api/v1/AddToExpansion/**").hasAnyAuthority(authAdmin);
-        http.authorizeRequests().antMatchers(GET, "/api/v1/collection/**").hasAnyAuthority(authUser, authAdmin);
-        http.authorizeRequests().antMatchers(POST, "/api/v1/collection/**").hasAnyAuthority(authUser, authAdmin);
-        http.authorizeRequests().antMatchers(GET, "/api/v1/user_collection/**").hasAnyAuthority(authUser, authAdmin);
-        http.authorizeRequests().antMatchers(POST, "/api/v1/create_expansion/**").hasAnyAuthority(authAdmin);
+        http.authorizeRequests().antMatchers(GET, "/api/v1/users/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/role/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/create_card/").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/AddToExpansion/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/collection/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/collection/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/user_collection/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/create_expansion/**").permitAll();
 
 
         http.authorizeRequests().anyRequest().authenticated();
