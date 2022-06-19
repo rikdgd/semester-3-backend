@@ -1,6 +1,5 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +16,7 @@ public class Expansion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long Id;
 
     @Column(name = "Name")
     private String Name;

@@ -1,11 +1,11 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.PokemonTypes;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,12 +15,12 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = "expansion")
 
 @Entity
-@Table(name = "pokemon_cards")
+@Table(name = "pokemonCards")
 public class PokemonCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long Id;
 
     @Column(name = "name")
     private String Name;
@@ -34,6 +34,9 @@ public class PokemonCard {
     @ManyToOne
     @JoinColumn(name = "expansion_id", referencedColumnName = "Id")
     private Expansion expansion;
+
+    @ManyToMany
+    private List<CardCollection> cardCollections;
 
     public PokemonCard(long id) {
         Id = id;
