@@ -1,9 +1,13 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.controller;
 
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.CardCollection;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.CollectionCardPair;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.services.CardService;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.services.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @CrossOrigin
 @RestController
@@ -11,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class CollectionController {
 
     private final CollectionService collectionService;
+    private final CardService cardService;
 
     @Autowired
-    public CollectionController(CollectionService collectionService) {
+    public CollectionController(CollectionService collectionService, CardService cardService) {
         this.collectionService = collectionService;
+        this.cardService = cardService;
     }
 
     @GetMapping("/collection/{id}")
@@ -27,15 +33,23 @@ public class CollectionController {
         return collectionService.GetByUserId(userId);
     }
 
-
-    @PostMapping("/collection/{userId}/add_card/{cardId}")
-    public CardCollection AddCardById(@PathVariable long userId, @PathVariable long cardId){
-        CardCollection createdCardCollection = collectionService.CreateCollection(userId);
-        return collectionService.AddCardById(createdCardCollection.getId(), cardId);
+    @PostMapping("create_collection/{userId}")
+    public CardCollection CreateCollectionWithUserId(@PathVariable Long userId) {
+        return collectionService.CreateCollection(userId);
     }
 
-    @PostMapping("collection/{collId}/remove_card/{cardId}")
-    public CardCollection RemoveCardById(@PathVariable long collId, @PathVariable long cardId){
-        return collectionService.RemoveCardById(collId, cardId);
+    @PostMapping("/collection/{collectionId}/add_card/{cardId}")
+    public CardCollection AddCard(@PathVariable Long collectionId, @PathVariable Long cardId){
+        CollectionCardPair collectionCardPair = new CollectionCardPair(
+                collectionService.GetById(collectionId),
+                cardService.GetCardById(cardId)
+        );
+
+        return collectionService.AddCard(collectionCardPair);
+    }
+
+    @PostMapping("collection/remove_card")
+    public CardCollection RemoveCard(@RequestBody CollectionCardPair collectionCardPair){
+        return collectionService.RemoveCard(collectionCardPair);
     }
 }

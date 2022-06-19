@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CardService {
 
-    private PokemonCardRepository pokemonCardRepository;
+    private final PokemonCardRepository pokemonCardRepository;
 
     public List<PokemonCard> GetAllCards(){
         return pokemonCardRepository.findAll();

@@ -35,12 +35,8 @@ public class PokemonCard {
     @JoinColumn(name = "expansion_id", referencedColumnName = "Id")
     private Expansion expansion;
 
-    @ManyToMany
-    private List<CardCollection> cardCollections;
-
-    public PokemonCard(long id) {
-        Id = id;
-    }
+//    @ManyToMany
+//    private List<CardCollection> cardCollections;
 
     public PokemonCard(long id, Expansion expansion) {
         Id = id;
