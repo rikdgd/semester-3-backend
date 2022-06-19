@@ -1,6 +1,6 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.controller;
 
-import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.Collection;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.CardCollection;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.services.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +18,24 @@ public class CollectionController {
     }
 
     @GetMapping("/collection/{id}")
-    public Collection GetById(@PathVariable long id){
+    public CardCollection GetById(@PathVariable long id){
         return collectionService.GetById(id);
     }
 
     @GetMapping("user_collection/{userId}")
-    public Collection GetByUserId(@PathVariable long userId){
+    public CardCollection GetByUserId(@PathVariable long userId){
         return collectionService.GetByUserId(userId);
     }
 
 
     @PostMapping("/collection/{userId}/add_card/{cardId}")
-    public Collection AddCardById(@PathVariable long userId, @PathVariable long cardId){
-        Collection createdCollection = collectionService.CreateCollection(userId);
-        return collectionService.AddCardById(createdCollection.getId(), cardId);
+    public CardCollection AddCardById(@PathVariable long userId, @PathVariable long cardId){
+        CardCollection createdCardCollection = collectionService.CreateCollection(userId);
+        return collectionService.AddCardById(createdCardCollection.getId(), cardId);
     }
 
     @PostMapping("collection/{collId}/remove_card/{cardId}")
-    public Collection RemoveCardById(@PathVariable long collId, @PathVariable long cardId){
+    public CardCollection RemoveCardById(@PathVariable long collId, @PathVariable long cardId){
         return collectionService.RemoveCardById(collId, cardId);
     }
 }

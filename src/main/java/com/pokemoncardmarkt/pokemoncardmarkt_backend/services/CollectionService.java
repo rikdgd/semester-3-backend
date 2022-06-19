@@ -1,8 +1,8 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.services;
 
-import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.Collection;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.CardCollection;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.PokemonCard;
-import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.User;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.AppUser;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,40 +19,40 @@ public class CollectionService {
     @Autowired
     private CardService cardService;
 
-    public Collection GetById(long id){
+    public CardCollection GetById(long id){
         return collectionRepository.findById(id).orElseThrow();
     }
 
-    public Collection GetByUserId(long userId){
-        User foundUser = userService.GetUserById(userId);
-        return collectionRepository.findCollectionByUser(foundUser);
+    public CardCollection GetByUserId(long userId){
+        AppUser foundAppUser = userService.GetUserById(userId);
+        return collectionRepository.findCardCollectionByAppUser(foundAppUser);
     }
 
-    public Collection CreateCollection(long userId){
-        User requestedUser = userService.GetUserById(userId);
-        Collection newCollection = new Collection(requestedUser);
-        return collectionRepository.save(newCollection);
+    public CardCollection CreateCollection(long userId){
+        AppUser requestedAppUser = userService.GetUserById(userId);
+        CardCollection newCardCollection = new CardCollection(requestedAppUser);
+        return collectionRepository.save(newCardCollection);
     }
 
-    public Collection AddCardById(long collectionId, long cardId){
+    public CardCollection AddCardById(long collectionId, long cardId){
         PokemonCard foundCard = cardService.GetCardById(cardId);
-        Collection targetCollection = collectionRepository.findById(collectionId).orElseThrow();
+        CardCollection targetCardCollection = collectionRepository.findById(collectionId).orElseThrow();
 
-        List<PokemonCard> collectionCards = targetCollection.getCards();
+        List<PokemonCard> collectionCards = targetCardCollection.getCards();
         collectionCards.add(foundCard);
-        targetCollection.setCards(collectionCards);
+        targetCardCollection.setCards(collectionCards);
 
-        return collectionRepository.save(targetCollection);
+        return collectionRepository.save(targetCardCollection);
     }
 
-    public Collection RemoveCardById(long collectionId, long cardId){
+    public CardCollection RemoveCardById(long collectionId, long cardId){
         PokemonCard foundCard = cardService.GetCardById(cardId);
-        Collection targetCollection = collectionRepository.findById(collectionId).orElseThrow();
+        CardCollection targetCardCollection = collectionRepository.findById(collectionId).orElseThrow();
 
-        List<PokemonCard> collectionCards = targetCollection.getCards();
+        List<PokemonCard> collectionCards = targetCardCollection.getCards();
         collectionCards.remove(foundCard);
-        targetCollection.setCards(collectionCards);
+        targetCardCollection.setCards(collectionCards);
 
-        return collectionRepository.save(targetCollection);
+        return collectionRepository.save(targetCardCollection);
     }
 }

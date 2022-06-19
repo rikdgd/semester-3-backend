@@ -1,6 +1,5 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.PokemonTypes;
 import lombok.*;
@@ -21,7 +20,7 @@ public class PokemonCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long Id;
 
     @Column(name = "name")
     private String Name;
@@ -37,7 +36,7 @@ public class PokemonCard {
     private Expansion expansion;
 
     @ManyToMany
-    private List<Collection> collections;
+    private List<CardCollection> cardCollections;
 
     public PokemonCard(long id) {
         Id = id;

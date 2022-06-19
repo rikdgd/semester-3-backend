@@ -15,20 +15,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "Collections")
-public class Collection {
+public class CardCollection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne(optional = true)
-    private User user;
+    private AppUser appUser;
 
     @ManyToMany
     @Column(name = "cards")
     private List<PokemonCard> cards;
 
-    public Collection(User user){
-        this.user = user;
+    public CardCollection(AppUser appUser){
+        this.appUser = appUser;
     }
 }
