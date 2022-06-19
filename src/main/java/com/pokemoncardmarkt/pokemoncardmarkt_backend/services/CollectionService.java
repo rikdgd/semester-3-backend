@@ -1,6 +1,7 @@
 package com.pokemoncardmarkt.pokemoncardmarkt_backend.services;
 
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.CardCollection;
+import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.CollectionCardPair;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.PokemonCard;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.model.AppUser;
 import com.pokemoncardmarkt.pokemoncardmarkt_backend.repository.CollectionRepository;
@@ -34,25 +35,25 @@ public class CollectionService {
         return collectionRepository.save(newCardCollection);
     }
 
-    public CardCollection AddCardById(long collectionId, long cardId){
-        PokemonCard foundCard = cardService.GetCardById(cardId);
-        CardCollection targetCardCollection = collectionRepository.findById(collectionId).orElseThrow();
-
-        List<PokemonCard> collectionCards = targetCardCollection.getCards();
-        collectionCards.add(foundCard);
-        targetCardCollection.setCards(collectionCards);
-
-        return collectionRepository.save(targetCardCollection);
+    public CardCollection CreateCollectionByUsername(String username){
+        AppUser requestedAppUser = userService.GetUserByName(username);
+        CardCollection newCardCollection = new CardCollection(requestedAppUser);
+        return collectionRepository.save(newCardCollection);
     }
 
-    public CardCollection RemoveCardById(long collectionId, long cardId){
-        PokemonCard foundCard = cardService.GetCardById(cardId);
-        CardCollection targetCardCollection = collectionRepository.findById(collectionId).orElseThrow();
+    public CardCollection AddCard(CollectionCardPair collectionCardPair){
+        CardCollection cardCollection = collectionCardPair.getCollection();
+        PokemonCard pokemonCard = collectionCardPair.getCard();
 
-        List<PokemonCard> collectionCards = targetCardCollection.getCards();
-        collectionCards.remove(foundCard);
-        targetCardCollection.setCards(collectionCards);
+        cardCollection.getCards().add(pokemonCard);
+        return collectionRepository.save(cardCollection);
+    }
 
-        return collectionRepository.save(targetCardCollection);
+    public CardCollection RemoveCard(CollectionCardPair collectionCardPair){
+        CardCollection cardCollection = collectionCardPair.getCollection();
+        PokemonCard pokemonCard = collectionCardPair.getCard();
+
+        cardCollection.getCards().remove(pokemonCard);
+        return collectionRepository.save(cardCollection);
     }
 }
