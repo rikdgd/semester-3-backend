@@ -70,8 +70,14 @@ public class UserService implements IAppUserService, UserDetailsService {
 
     public long Login(String username, String password){
         try{
-            AppUser loginAppUser = userRepository.getUserByNameAndPassword(username, password);
-            return loginAppUser.getId();
+            AppUser loginAppUser = userRepository.findAppUserByName(username);
+            String officialPassword = loginAppUser.getPassword();
+
+            if (passwordEncoder.matches(password, officialPassword)) {
+                return loginAppUser.getId();
+            }
+
+            return -1;
         }
         // If login failed, return impossible id to communicate failure.
         catch(Exception ex){

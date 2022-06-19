@@ -38,6 +38,11 @@ public class CollectionController {
         return collectionService.CreateCollection(userId);
     }
 
+    @PostMapping("create_collection_by_name/{username}")
+    public CardCollection CreateCollectionWithUserId(@PathVariable String username) {
+        return collectionService.CreateCollectionByUsername(username);
+    }
+
     @PostMapping("/collection/{collectionId}/add_card/{cardId}")
     public CardCollection AddCard(@PathVariable Long collectionId, @PathVariable Long cardId){
         CollectionCardPair collectionCardPair = new CollectionCardPair(
@@ -48,8 +53,13 @@ public class CollectionController {
         return collectionService.AddCard(collectionCardPair);
     }
 
-    @PostMapping("collection/remove_card")
-    public CardCollection RemoveCard(@RequestBody CollectionCardPair collectionCardPair){
+    @PostMapping("/collection/{collectionId}/remove_card/{cardId}")
+    public CardCollection RemoveCard(@PathVariable Long collectionId, @PathVariable Long cardId){
+        CollectionCardPair collectionCardPair = new CollectionCardPair(
+                collectionService.GetById(collectionId),
+                cardService.GetCardById(cardId)
+        );
+
         return collectionService.RemoveCard(collectionCardPair);
     }
 }

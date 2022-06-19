@@ -35,6 +35,12 @@ public class CollectionService {
         return collectionRepository.save(newCardCollection);
     }
 
+    public CardCollection CreateCollectionByUsername(String username){
+        AppUser requestedAppUser = userService.GetUserByName(username);
+        CardCollection newCardCollection = new CardCollection(requestedAppUser);
+        return collectionRepository.save(newCardCollection);
+    }
+
     public CardCollection AddCard(CollectionCardPair collectionCardPair){
         CardCollection cardCollection = collectionCardPair.getCollection();
         PokemonCard pokemonCard = collectionCardPair.getCard();
